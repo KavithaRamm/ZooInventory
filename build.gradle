@@ -27,8 +27,7 @@ distZip {
 
 startScripts {
     doLast {
-        unixScript.text = unixScript.text.replace('exec "$JAVACMD"', 'cp $APP_HOME/animal.db .\n exec "$JAVACMD"')
-        windowsScript.text = windowsScript.text.replace(':execute',':execute \n copy %APP_HOME%/animal.db .')
+        unixScript.text = unixScript.text.replace('exec "$JAVACMD"', 'exec "$JAVACMD" -DdbPath=$APP_HOME')
     }
 }
 

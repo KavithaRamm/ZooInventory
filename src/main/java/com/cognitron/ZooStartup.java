@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class ZooStartup extends Application {
@@ -27,7 +28,7 @@ public class ZooStartup extends Application {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("starting");
+		System.out.println("starting " + Arrays.asList(args));
 		launch(args);
 	}
 }

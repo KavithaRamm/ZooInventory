@@ -2,8 +2,10 @@ package com.cognitron.dao;
 
 import com.cognitron.model.Animal;
 import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,10 +77,14 @@ public class AnimalDao {
 	}
 
 	private Connection getConnection(Connection connection) throws SQLException {
+		String path = System.getProperty("dbPath", "");
+		if (StringUtils.isNotEmpty(path)) {
+			path = path + File.separator;
+		}
 
-		System.out.println("Working Directory = " +
-				System.getProperty("user.dir"));
-		return DriverManager.getConnection("jdbc:sqlite:animal.db");
+		String dbUrl = "jdbc:sqlite:" + path + "animal.db";
+		System.out.println("dburl=" + dbUrl);
+		return DriverManager.getConnection(dbUrl);
 	}
 
 }
