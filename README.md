@@ -3,17 +3,18 @@ This is a very simple gradle/javafx/sqllite sample application.
 The sample applications lets a users view list of animals and also add/delete them.
 Validations are not implemented in this sample.
 
-To run(For Now, Tested only in Linux), 
+To run(tested only in Linux, should work in mac also) 
 
-* clone this repo
-* Go to zoo-maint folder, Run `./gradlew` to install gradle locally
-* run `./gradlew setUpDB` (This sets up the sqllite db and needs to be run only once. Subsequent runs are ignored)
-* sudo 'apt-get install openjfx'(This is needed for linux to install jfx in openjdk)
-* run `gradle clean build distZip` creates zip file in the build/distribution/ folder.
-* Extract the zoo-maint.zip
-* Go to zoo-maint/bin folder and click the zoo-maint script file.
-* Zoo application launches
+* clone this repo and go to zoo-main folder and run the below commands.
+* `./gradlew` to install gradle locally
+* `./gradlew setUpDB` (This sets up the sqllite db and needs to be run only once. Subsequent runs are ignored)
+* `sudo apt-get install openjfx`(Linux only: this is needed for linux to install jfx in openjdk)
+* `gradle clean build distZip` creates zip file zoo-maint.zip in the build/distribution/ folder.
+* Extract the zoo-maint.zip and execute zoo-maint script in bin folder.
 
+Note:
+* This is a very basic implementation. No Validations have been done.
+* javafx classes have a lot of final methods. So it is not possible to mock these classes/methods. So only minimal unit testing was done.
 
 References:
 
