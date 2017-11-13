@@ -1,6 +1,6 @@
 This is a very simple gradle/javafx/sqllite sample application.
 
-The sample applications lets a users view list of animals and also add/delete them.
+The sample applications lets a user view list of animals and also add/delete them.
 
 To run(tested only in Linux, should work in mac also) 
 
