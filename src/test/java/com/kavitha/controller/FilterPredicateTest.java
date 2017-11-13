@@ -1,6 +1,6 @@
-package com.cognitron.controller;
+package com.kavitha.controller;
 
-import com.cognitron.model.Animal;
+import com.kavitha.model.Animal;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

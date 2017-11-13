@@ -1,7 +1,7 @@
-package com.cognitron.controller;
+package com.kavitha.controller;
 
-import com.cognitron.dao.AnimalDao;
-import com.cognitron.model.Animal;
+import com.kavitha.dao.AnimalDao;
+import com.kavitha.model.Animal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;

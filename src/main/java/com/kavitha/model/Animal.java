@@ -1,4 +1,4 @@
-package com.cognitron.model;
+package com.kavitha.model;
 
 import javafx.beans.property.SimpleStringProperty;
 

@@ -1,4 +1,4 @@
-package com.cognitron;
+package com.kavitha;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

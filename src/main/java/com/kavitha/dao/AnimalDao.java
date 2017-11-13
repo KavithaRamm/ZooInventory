@@ -1,6 +1,6 @@
-package com.cognitron.dao;
+package com.kavitha.dao;
 
-import com.cognitron.model.Animal;
+import com.kavitha.model.Animal;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;

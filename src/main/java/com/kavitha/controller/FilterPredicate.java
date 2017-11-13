@@ -1,7 +1,7 @@
-package com.cognitron.controller;
+package com.kavitha.controller;
 
 
-import com.cognitron.model.Animal;
+import com.kavitha.model.Animal;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.function.Predicate;
