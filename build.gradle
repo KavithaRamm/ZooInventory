@@ -1,0 +1,81 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.cognitron.ZooStartup'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+repositories {
+    mavenCentral()
+}
+
+jar {
+    baseName = 'zoo-maint'
+    version = '0.0.0-SNAPSHOT'
+    manifest {
+        attributes 'Main-Class': 'com.cognitron.ZooStartup'
+    }
+}
+
+distZip {
+    into(project.name) {
+        from '.'
+        include 'animal.db'
+    }
+}
+
+
+startScripts {
+    doLast {
+        unixScript.text = unixScript.text.replace('exec "$JAVACMD"', 'cp $APP_HOME/animal.db .\n exec "$JAVACMD"')
+        windowsScript.text = windowsScript.text.replace(':execute',':execute \n copy %APP_HOME%/animal.db .')
+    }
+}
+
+configurations { driver }
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.5'
+    compile 'org.apache.commons:commons-lang3:3.0'
+    compile 'com.google.guava:guava:11.0.2'
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.20.1'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'commons-dbutils', name: 'commons-dbutils', version: '1.6'
+    testCompile 'junit:junit:4.11'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    driver 'org.xerial:sqlite-jdbc:3.7.2'
+}
+
+//idea taken from https://gist.github.com/xconnecting/4166113
+import groovy.sql.Sql
+
+URLClassLoader loader = GroovyObject.class.classLoader
+configurations.driver.each { File file ->
+    //println("Loading file" + file.absolutePath)
+    loader.addURL(file.toURL())
+}
+
+task setUpDB << {
+    def sql = Sql.newInstance('jdbc:sqlite:animal.db'
+            , ''
+            , ''
+            , 'org.sqlite.JDBC')
+
+    def createTableQuery = "CREATE TABLE IF NOT EXISTS animal(" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "name varchar NOT NULL UNIQUE," +
+            "speciesName varchar NOT NULL)"
+
+    sql.execute(createTableQuery)
+
+    sql.execute("INSERT OR IGNORE INTO animal(name, speciesName) VALUES('Simba', 'Lion')")
+    sql.execute("INSERT OR IGNORE INTO animal(name, speciesName) VALUES('Mufasa', 'Lion')")
+
+    sql.eachRow('select * from animal') {
+        int id = it.id
+        println "id:$id name:$it.name speciesName:$it.speciesName"
+    }
+
+    sql.close()
+}
